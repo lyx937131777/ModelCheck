@@ -48,9 +48,9 @@ public class CTL {
     //若不为操作符返回0 否则返回x是几元操作符
     private int isOperator(char x){
         //TODO 可能要增加
-        if(x == '0' || x == '4' || x =='5'){
+        if(x == '0' || x == '2' || x =='3'){
             return 1;
-        }else if(x == '1' || x == '2' || x == '3' ){
+        }else if(x == '1' || x == '4' || x == '5' ){
             return 2;
         }
         return 0;
