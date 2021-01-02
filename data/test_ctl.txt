@@ -1,12 +1,12 @@
 11
-a 0
-b 0
-a0 0
-ab1 0
-a0b010 0
-a2 0
-a3 0
-ba4 0
-ba1a0b14 0
-ab5 0
-ba1a0b15 0
+N1
+N2
+N1 not
+N1 N2 and
+N1 N2 or
+N1 AX
+N1 EX
+N2 N1 AU
+N2 N1 and N1 not N2 and AU
+N1 N2 EU
+N2 N1 and N1 not N2 and EU

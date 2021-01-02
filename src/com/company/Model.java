@@ -5,21 +5,10 @@ import java.util.*;
 
 //有向图
 public class Model {
-    //点(状态) 0 到 count-1
+    //点数(状态数) 0 到 count-1
     private int count;
-    private List<Integer> S0;
-
-    //原子 规定原子不会出现数字
-    private List<String> apList;
-    private Map<String, Character> apMap;
 
     //状态+后序表达式的形式
-    //not  0
-    //and 1
-    //AX 2
-    //EX 3
-    //AU 4
-    //EU 5
     private Map<String, Boolean> sCTLMap = new HashMap<>();
 
     //邻接矩阵
@@ -35,33 +24,36 @@ public class Model {
             return sCTLMap.get(sCTL);
         }//已经标记过的直接返回标记结果
         String root = ctl.getRoot();
-        if (isOperator(root.charAt(0)) == 0) {
+        if (isOperator(root) == 0) {
             sCTLMap.put(sCTL, false);
         } else {
-            sCTLMap.put(sCTL, verify(s, ctl, Integer.valueOf(root)));
+            sCTLMap.put(sCTL, verify(s, ctl, root));
         }
         return sCTLMap.get(sCTL);//返回时一定对该s+CTL进行了标记
     }
 
     //根据不同的操作符 用不同的方法验证s是否满足CTL
-    private boolean verify(int s, CTL ctl, int operator) {
+    private boolean verify(int s, CTL ctl, String operator) {
         switch (operator) {
-            case 0: {
+            case "not": {
                 return verifyNot(s, ctl);
             }
-            case 1: {
+            case "and": {
                 return verifyAnd(s, ctl);
             }
-            case 2: {
+            case "or":{
+                return verifyOr(s,ctl);
+            }
+            case "AX": {
                 return verifyAX(s, ctl);
             }
-            case 3: {
+            case "EX": {
                 return verifyEX(s, ctl);
             }
-            case 4: {
+            case "AU": {
                 return verifyAU(s, ctl);
             }
-            case 5: {
+            case "EU": {
                 return verifyEU(s, ctl);
             }
             default:
@@ -70,14 +62,24 @@ public class Model {
     }
 
     //若不为操作符返回0 否则返回x是几元操作符
-    private int isOperator(char x) {
+    private int isOperator(String root){
         //TODO 可能要增加
-        if (x == '0' || x == '2' || x == '3') {
-            return 1;
-        } else if (x == '1' || x == '4' || x == '5') {
-            return 2;
+        switch (root){
+            case "not":
+            case "AX":
+            case "EX":{
+                return 1;
+            }
+            case "and":
+            case "or":
+            case "AU":
+            case "EU": {
+                return 2;
+            }
+            default:{
+                return 0;
+            }
         }
-        return 0;
     }
 
     //6种算子 分别实现
@@ -89,6 +91,9 @@ public class Model {
         return verify(s, ctl.getLeft()) && verify(s, ctl.getRight());
     }
 
+    private boolean verifyOr(int s, CTL ctl){
+        return verify(s, ctl.getLeft()) || verify(s, ctl.getRight());
+    }
     private boolean verifyAX(int s, CTL ctl) {
         for (int t = 0; t < count; t++) {
             if (m[s][t] && !verify(t, ctl.getLeft())) {
@@ -184,25 +189,20 @@ public class Model {
     public Model(String modelText) {
         assert modelText != null;
         String[] modelArray = modelText.split("\n");
-        this.count = Integer.parseInt(modelArray[0]);
-        m = new boolean[this.count][this.count];
-        apMap = new HashMap<>();
-        for (int i = 0; i < this.count; ++i) {
-            sCTLMap.put(i + "T", true);
+        count = Integer.parseInt(modelArray[0]);
+        m = new boolean[count][count];
+        for (int i = 0; i < count; ++i) {
+            sCTLMap.put(i + "TRUE ", true);
         }
         int edges = Integer.parseInt(modelArray[1]);
         for (int i = 2; i < edges + 2; ++i) {
             String[] node = modelArray[i].split(" ");
             m[Integer.parseInt(node[0])][Integer.parseInt(node[1])] = true;
         }
-        String[] aps = modelArray[edges + 2].split(" ");
-        for (int i = 0; i < aps.length; ++i) {
-            apMap.put(aps[i], (char) ('a' + i));
-        }
-        for (int i = edges + 3; i < count + edges + 3; ++i) {
+        for (int i = edges + 2; i < count + edges + 2; ++i) {
             String[] label = modelArray[i].split(" ");
             for (int j = 1; j < label.length; ++j) {
-                sCTLMap.put(label[0] + apMap.get(label[j]), true);
+                sCTLMap.put(label[0] + label[j] + " ", true);
             }
         }
 
