@@ -5,8 +5,6 @@ import java.util.*;
 //系统分析与验证作业 主入口
 public class Main {
 
-    private static Map<String, Boolean> m = new HashMap<>();
-
     public static void main(String[] args) {
         String modelText = InputUtil.readFile("data/test_model.txt");
         String cltText = InputUtil.readFile("data/test_ctl.txt");
