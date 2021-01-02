@@ -1,4 +1,4 @@
-11
+16
 N1
 N2
 N1 not
@@ -10,3 +10,8 @@ N2 N1 AU
 N2 N1 and N1 not N2 and AU
 N1 N2 EU
 N2 N1 and N1 not N2 and EU
+N1 N2 ->
+N1 AF
+N1 N2 and EF
+N1 AG
+N2 EG

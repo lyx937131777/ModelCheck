@@ -84,12 +84,4 @@ public class Tarjan {
         return components;
     }
 
-    private void print() {
-        for (int i = 0; i < components.size(); ++i) {
-            for (int j : components.get(i)) {
-                System.out.print(j + " ");
-            }
-            System.out.println();
-        }
-    }
 }

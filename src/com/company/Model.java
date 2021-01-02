@@ -1,6 +1,7 @@
 package com.company;
 
 import java.io.File;
+import java.lang.reflect.Array;
 import java.util.*;
 
 //有向图
@@ -14,6 +15,13 @@ public class Model {
     //邻接矩阵
     private boolean[][] m;
 
+    //邻接矩阵的反向图
+    private boolean[][] m_;
+
+    //强连通分量
+    private List<List<Integer>> components;
+    //公平性状态集合
+    private List<List<Integer>> fair = new ArrayList<>();
 
 
     //核心函数 对外可见
@@ -41,8 +49,8 @@ public class Model {
             case "and": {
                 return verifyAnd(s, ctl);
             }
-            case "or":{
-                return verifyOr(s,ctl);
+            case "or": {
+                return verifyOr(s, ctl);
             }
             case "AX": {
                 return verifyAX(s, ctl);
@@ -62,12 +70,12 @@ public class Model {
     }
 
     //若不为操作符返回0 否则返回x是几元操作符
-    private int isOperator(String root){
+    private int isOperator(String root) {
         //TODO 可能要增加
-        switch (root){
+        switch (root) {
             case "not":
             case "AX":
-            case "EX":{
+            case "EX": {
                 return 1;
             }
             case "and":
@@ -76,7 +84,7 @@ public class Model {
             case "EU": {
                 return 2;
             }
-            default:{
+            default: {
                 return 0;
             }
         }
@@ -91,9 +99,10 @@ public class Model {
         return verify(s, ctl.getLeft()) && verify(s, ctl.getRight());
     }
 
-    private boolean verifyOr(int s, CTL ctl){
+    private boolean verifyOr(int s, CTL ctl) {
         return verify(s, ctl.getLeft()) || verify(s, ctl.getRight());
     }
+
     private boolean verifyAX(int s, CTL ctl) {
         for (int t = 0; t < count; t++) {
             if (m[s][t] && !verify(t, ctl.getLeft())) {
@@ -182,7 +191,48 @@ public class Model {
     }
 
     private void verifyQ() {
+        List<Integer> temp = new ArrayList<>();
+        // 遍历所有强连通分量
+        for (List<Integer> comp : components) {
+            boolean flag = true;
+            for (List<Integer> s : fair) {
+                boolean notEmpty = false;
+                for (int i = 0; i < comp.size(); ++i) {
+                    for (int j = 0; j < s.size(); ++j) {
+                        if (comp.get(i).intValue() == s.get(j).intValue()) {
+                            notEmpty = true;
+                            break;
+                        }
+                    }
+                    if (notEmpty) {
+                        break;
+                    }
+                }
+                if (!notEmpty) {
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag) {
+                for (int i = 0; i < comp.size(); ++i) {
+                    sCTLMap.put(i + "Q ", true);
+                    temp.add(i);
+                }
+            }
+        }
+        for (int n : temp) {
+            dfsQ(n);
+        }
+    }
 
+    //辅助打Q标签的dfs
+    private void dfsQ(int u) {
+        for (int i = 0; i < count; ++i) {
+            if (m_[u][i] && !sCTLMap.get(i + "Q ")) {
+                sCTLMap.put(i + "Q ", true);
+                dfsQ(i);
+            }
+        }
     }
 
     //TODO 文件读入 文件中原子先用abcd表示 （这是model单独用一个文件表示时使用的 我倾向于model和CTL放在一个文件输入 写在InputUtil里）
@@ -191,21 +241,41 @@ public class Model {
         String[] modelArray = modelText.split("\n");
         count = Integer.parseInt(modelArray[0]);
         m = new boolean[count][count];
+        m_ = new boolean[count][count];
         for (int i = 0; i < count; ++i) {
             sCTLMap.put(i + "TRUE ", true);
         }
+        //所有边数
         int edges = Integer.parseInt(modelArray[1]);
         for (int i = 2; i < edges + 2; ++i) {
             String[] node = modelArray[i].split(" ");
-            m[Integer.parseInt(node[0])][Integer.parseInt(node[1])] = true;
+            int u = Integer.parseInt(node[0]);
+            int v = Integer.parseInt(node[1]);
+            m[u][v] = true;
+            m[v][u] = true;
         }
+        //为每个状态上的原子命题打上标签
         for (int i = edges + 2; i < count + edges + 2; ++i) {
             String[] label = modelArray[i].split(" ");
             for (int j = 1; j < label.length; ++j) {
                 sCTLMap.put(label[0] + label[j] + " ", true);
             }
         }
+        //公平性F的个数
+        int fs = Integer.parseInt(modelArray[2 + edges + count]);
+        //读入所有的公平性集合
+        for (int i = count + edges + 3; i < fs + count + edges + 3; ++i) {
+            String[] status = modelArray[i].split(" ");
+            List<Integer> list = new ArrayList();
+            for (int j = 0; j < status.length; ++j) {
+                list.add(Integer.parseInt(status[j]));
+            }
+            fair.add(list);
+        }
+        //获取所有强连通分量
+        this.components = new Tarjan(count, m).getComponents();
 
+        verifyQ();
     }
 
 
@@ -226,6 +296,15 @@ public class Model {
         for (int i = 0; i < count; i++) {
             for (int j = 0; j < count; j++) {
                 System.out.print(m[i][j] ? 1 : 0);
+            }
+            System.out.println();
+        }
+    }
+
+    private void printArray(List<List<Integer>> list) {
+        for (int i = 0; i < list.size(); ++i) {
+            for (int j : list.get(i)) {
+                System.out.print(j + " ");
             }
             System.out.println();
         }

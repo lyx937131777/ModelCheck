@@ -23,7 +23,6 @@ public class CheckSystem {
                 System.out.println("state: " + s + " result: " + model.verify(s, ctl));
             }
         }
-        System.out.println();
     }
 
 }
