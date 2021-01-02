@@ -7,20 +7,9 @@
 2 2
 3 4
 4 3
+a b
 0 a b
 1 a
 2 b
 3 a
 4 b
-11
-a
-b
-a0
-ab1
-a0b010
-a2
-a3
-ba4
-ba1a0b14
-ab5
-ba1a0b15

@@ -11,7 +11,7 @@ public class Model {
 
     //原子 规定原子不会出现数字
     private List<String> apList;
-    private Map<String,String> apMap;
+    private Map<String, Character> apMap;
 
     //状态+后序表达式的形式
     //not  0
@@ -20,47 +20,47 @@ public class Model {
     //EX 3
     //AU 4
     //EU 5
-    private Map<String,Boolean> sCTLMap = new HashMap<>();
+    private Map<String, Boolean> sCTLMap = new HashMap<>();
 
     //邻接矩阵
-    private boolean [][] m;
+    private boolean[][] m;
 
     //核心函数 对外可见
     //判断某个状态s是否含满足CTL ctl
-    public boolean verify(int s,CTL ctl){
+    public boolean verify(int s, CTL ctl) {
         String sCTL = s + ctl.toString();
-        if(sCTLMap.get(sCTL) != null){
+        if (sCTLMap.get(sCTL) != null) {
             return sCTLMap.get(sCTL);
         }//已经标记过的直接返回标记结果
         String root = ctl.getRoot();
-        if(isOperator(root.charAt(0)) == 0){
-            sCTLMap.put(sCTL,false);
-        }else {
-            sCTLMap.put(sCTL,verify(s,ctl,Integer.valueOf(root)));
+        if (isOperator(root.charAt(0)) == 0) {
+            sCTLMap.put(sCTL, false);
+        } else {
+            sCTLMap.put(sCTL, verify(s, ctl, Integer.valueOf(root)));
         }
         return sCTLMap.get(sCTL);//返回时一定对该s+CTL进行了标记
     }
 
     //根据不同的操作符 用不同的方法验证s是否满足CTL
-    private boolean verify(int s, CTL ctl, int operator){
-        switch (operator){
-            case 0:{
-                return verifyNot(s,ctl);
+    private boolean verify(int s, CTL ctl, int operator) {
+        switch (operator) {
+            case 0: {
+                return verifyNot(s, ctl);
             }
-            case 1:{
-                return verifyAnd(s,ctl);
+            case 1: {
+                return verifyAnd(s, ctl);
             }
-            case 2:{
-                return verifyAX(s,ctl);
+            case 2: {
+                return verifyAX(s, ctl);
             }
-            case 3:{
-                return verifyEX(s,ctl);
+            case 3: {
+                return verifyEX(s, ctl);
             }
-            case 4:{
-                return verifyAU(s,ctl);
+            case 4: {
+                return verifyAU(s, ctl);
             }
-            case 5:{
-                return verifyEU(s,ctl);
+            case 5: {
+                return verifyEU(s, ctl);
             }
             default:
                 return false;
@@ -68,71 +68,71 @@ public class Model {
     }
 
     //若不为操作符返回0 否则返回x是几元操作符
-    private int isOperator(char x){
+    private int isOperator(char x) {
         //TODO 可能要增加
-        if(x == '0' || x == '2' || x =='3'){
+        if (x == '0' || x == '2' || x == '3') {
             return 1;
-        }else if(x == '1' || x == '4' || x == '5' ){
+        } else if (x == '1' || x == '4' || x == '5') {
             return 2;
         }
         return 0;
     }
 
     //6种算子 分别实现
-    private boolean verifyNot(int s, CTL ctl){
-        return !verify(s,ctl.getLeft());
+    private boolean verifyNot(int s, CTL ctl) {
+        return !verify(s, ctl.getLeft());
     }
 
-    private boolean verifyAnd(int s, CTL ctl){
-        return verify(s,ctl.getLeft()) && verify(s,ctl.getRight());
+    private boolean verifyAnd(int s, CTL ctl) {
+        return verify(s, ctl.getLeft()) && verify(s, ctl.getRight());
     }
 
-    private boolean verifyAX(int s, CTL ctl){
-        for(int t = 0; t < count; t++){
-            if(m[s][t] && !verify(t,ctl.getLeft())){
+    private boolean verifyAX(int s, CTL ctl) {
+        for (int t = 0; t < count; t++) {
+            if (m[s][t] && !verify(t, ctl.getLeft())) {
                 return false;
             }
         }
         return true;
     }
 
-    private boolean verifyEX(int s, CTL ctl){
-        for(int t = 0; t < count; t++){
-            if(m[s][t] && verify(t,ctl.getLeft())){
+    private boolean verifyEX(int s, CTL ctl) {
+        for (int t = 0; t < count; t++) {
+            if (m[s][t] && verify(t, ctl.getLeft())) {
                 return true;
             }
         }
         return false;
     }
 
-    private boolean verifyAU(int s, CTL ctl){
-        boolean [] visited = new boolean[count];
+    private boolean verifyAU(int s, CTL ctl) {
+        boolean[] visited = new boolean[count];
         Queue<Integer> queue = new LinkedList<>();
         queue.offer(s);
-        while (!queue.isEmpty()){
+        while (!queue.isEmpty()) {
             int u = queue.poll();
             String uCTL = u + ctl.toString();
-            if(sCTLMap.get(uCTL) != null){
-                if(sCTLMap.get(uCTL)){
+            if (sCTLMap.get(uCTL) != null) {
+                if (sCTLMap.get(uCTL)) {
                     continue;
                 }
                 return false;
             }
-            if(visited[u]){
-                sCTLMap.put(uCTL,false);
+            if (visited[u]) {
+                sCTLMap.put(uCTL, false);
                 return false;
             }
             visited[u] = true;
-            if(verify(u,ctl.getRight())){
-                sCTLMap.put(uCTL,true);
+            if (verify(u, ctl.getRight())) {
+                sCTLMap.put(uCTL, true);
                 continue;
             }
-            if(!verify(u,ctl.getLeft())){
-                sCTLMap.put(uCTL,false);
+            if (!verify(u, ctl.getLeft())) {
+                sCTLMap.put(uCTL, false);
                 return false;
             }
-            for(int v = 0; v < count; v++){
-                if(m[u][v]){
+            for (int v = 0; v < count; v++) {
+                if (m[u][v]) {
                     queue.offer(v);
                 }
             }
@@ -140,33 +140,33 @@ public class Model {
         return true;
     }
 
-    private boolean verifyEU(int s, CTL ctl){
-        boolean [] visited = new boolean[count];
+    private boolean verifyEU(int s, CTL ctl) {
+        boolean[] visited = new boolean[count];
         Queue<Integer> queue = new LinkedList<>();
         queue.offer(s);
-        while (!queue.isEmpty()){
+        while (!queue.isEmpty()) {
             int u = queue.poll();
             String uCTL = u + ctl.toString();
-            if(sCTLMap.get(uCTL) != null){
-                if(sCTLMap.get(uCTL)){
+            if (sCTLMap.get(uCTL) != null) {
+                if (sCTLMap.get(uCTL)) {
                     return true;
                 }
                 continue;
             }
-            if(visited[u]){
+            if (visited[u]) {
                 continue;
             }
             visited[u] = true;
-            if(verify(u,ctl.getRight())){
-                sCTLMap.put(uCTL,true);
+            if (verify(u, ctl.getRight())) {
+                sCTLMap.put(uCTL, true);
                 return true;
             }
-            if(!verify(u,ctl.getLeft())){
-                sCTLMap.put(uCTL,false);
+            if (!verify(u, ctl.getLeft())) {
+                sCTLMap.put(uCTL, false);
                 continue;
             }
-            for(int v = 0; v < count; v++){
-                if(m[u][v]){
+            for (int v = 0; v < count; v++) {
+                if (m[u][v]) {
                     queue.offer(v);
                 }
             }
@@ -175,39 +175,50 @@ public class Model {
     }
 
     //TODO 文件读入 文件中原子先用abcd表示 （这是model单独用一个文件表示时使用的 我倾向于model和CTL放在一个文件输入 写在InputUtil里）
-    public Model(File f){
-        try{
-
-        }catch (Exception e){
-            e.printStackTrace();
+    public Model(String modelText) {
+        assert modelText != null;
+        String[] modelArray = modelText.split("\n");
+        this.count = Integer.parseInt(modelArray[0]);
+        m = new boolean[this.count][this.count];
+        apMap = new HashMap<>();
+        for (int i = 0; i < this.count; ++i) {
+            sCTLMap.put(i + "T", true);
+        }
+        int edges = Integer.parseInt(modelArray[1]);
+        for (int i = 2; i < edges + 2; ++i) {
+            String[] node = modelArray[i].split(" ");
+            m[Integer.parseInt(node[0])][Integer.parseInt(node[1])] = true;
+        }
+        String[] aps = modelArray[edges + 2].split(" ");
+        for (int i = 0; i < aps.length; ++i) {
+            apMap.put(aps[i], (char) ('a' + i));
+        }
+        for (int i = edges + 3; i < count + edges + 3; ++i) {
+            String[] label = modelArray[i].split(" ");
+            for (int j = 1; j < label.length; ++j) {
+                sCTLMap.put(label[0] + apMap.get(label[j]), true);
+            }
         }
     }
 
-    public Model(int count){
-        this.count = count;
-        for(int s = 0; s < count; s++){
-            sCTLMap.put(s+"T",true);
-        }
-        m = new boolean[count][count];
-    }
 
-    public void addEdge(int p, int q){
+    public void addEdge(int p, int q) {
         m[p][q] = true;
     }
 
 
-    public int getCount(){
+    public int getCount() {
         return count;
     }
 
-    public void setP(int s, String a){
-        sCTLMap.put(s+a,true);
+    public void setP(int s, String a) {
+        sCTLMap.put(s + a, true);
     }
 
-    public void printM(){
-        for(int i = 0; i < count; i++){
-            for(int j = 0; j < count; j++){
-                System.out.print(m[i][j]?1:0);
+    public void printM() {
+        for (int i = 0; i < count; i++) {
+            for (int j = 0; j < count; j++) {
+                System.out.print(m[i][j] ? 1 : 0);
             }
             System.out.println();
         }
