@@ -22,7 +22,7 @@ public class Model {
             return sCTLMap.get(sCTL);
         }//已经标记过的直接返回标记结果
         String root = ctl.getRoot();
-        if (isOperator(root) == 0) {
+        if (CTL.isOperator(root) == 0) {
             sCTLMap.put(sCTL, false);
         } else {
             sCTLMap.put(sCTL, verify(s, ctl, root));
@@ -42,6 +42,9 @@ public class Model {
             case "or":{
                 return verifyOr(s,ctl);
             }
+            case "->":{
+                return verifyImplication(s,ctl);
+            }
             case "AX": {
                 return verifyAX(s, ctl);
             }
@@ -54,29 +57,20 @@ public class Model {
             case "EU": {
                 return verifyEU(s, ctl);
             }
+            case "AF":{
+                return verifyAF(s,ctl);
+            }
+            case "EF":{
+                return verifyEF(s,ctl);
+            }
+            case "AG":{
+                return verifyAG(s,ctl);
+            }
+            case "EG":{
+                return verifyEG(s,ctl);
+            }
             default:
                 return false;
-        }
-    }
-
-    //若不为操作符返回0 否则返回x是几元操作符
-    private int isOperator(String root){
-        //TODO 可能要增加
-        switch (root){
-            case "not":
-            case "AX":
-            case "EX":{
-                return 1;
-            }
-            case "and":
-            case "or":
-            case "AU":
-            case "EU": {
-                return 2;
-            }
-            default:{
-                return 0;
-            }
         }
     }
 
@@ -92,6 +86,34 @@ public class Model {
     private boolean verifyOr(int s, CTL ctl){
         return verify(s, ctl.getLeft()) || verify(s, ctl.getRight());
     }
+
+    private boolean verifyImplication(int s, CTL ctl){
+        return !verify(s,ctl.getLeft()) || verify(s,ctl.getRight());
+    }
+
+    private boolean verifyAF(int s, CTL ctl){
+        CTL newCTL = new CTL(CTL.CTL_TRUE,ctl.getLeft(),"AU");
+        return verify(s,newCTL);
+    }
+    private boolean verifyEF(int s, CTL ctl){
+        CTL newCTL = new CTL(CTL.CTL_TRUE,ctl.getLeft(),"EU");
+        return verify(s,newCTL);
+    }
+
+    private boolean verifyAG(int s, CTL ctl) {
+        CTL notCTL = new CTL(ctl.getLeft(),null,"not");
+        CTL efCTL = new CTL(notCTL,null,"EF");
+        CTL newCTL =  new CTL(efCTL,null,"not");
+        return verify(s,newCTL);
+    }
+
+    private boolean verifyEG(int s, CTL ctl) {
+        CTL notCTL = new CTL(ctl.getLeft(),null,"not");
+        CTL afCTL = new CTL(notCTL,null,"AF");
+        CTL newCTL =  new CTL(afCTL,null,"not");
+        return verify(s,newCTL);
+    }
+
     private boolean verifyAX(int s, CTL ctl) {
         for (int t = 0; t < count; t++) {
             if (m[s][t] && !verify(t, ctl.getLeft())) {
@@ -185,18 +207,16 @@ public class Model {
         String[] modelArray = modelText.split("\n");
         count = Integer.parseInt(modelArray[0]);
         m = new boolean[count][count];
-        for (int i = 0; i < count; ++i) {
-            sCTLMap.put(i + "TRUE ", true);
-        }
+        setTRUE();
         int edges = Integer.parseInt(modelArray[1]);
         for (int i = 2; i < edges + 2; ++i) {
             String[] node = modelArray[i].split(" ");
-            m[Integer.parseInt(node[0])][Integer.parseInt(node[1])] = true;
+            addEdge(Integer.parseInt(node[0]),Integer.parseInt(node[1]));
         }
         for (int i = edges + 2; i < count + edges + 2; ++i) {
             String[] label = modelArray[i].split(" ");
             for (int j = 1; j < label.length; ++j) {
-                sCTLMap.put(label[0] + label[j] + " ", true);
+                setP(Integer.parseInt(label[0]),label[j]);
             }
         }
     }
@@ -206,21 +226,25 @@ public class Model {
         m[p][q] = true;
     }
 
-
     public int getCount() {
         return count;
     }
 
-    public void setP(int s, String a) {
-        sCTLMap.put(s + a, true);
-    }
-
-    public void printM() {
-        for (int i = 0; i < count; i++) {
-            for (int j = 0; j < count; j++) {
-                System.out.print(m[i][j] ? 1 : 0);
-            }
-            System.out.println();
+    private void setTRUE(){
+        for(int s = 0; s < count; s++){
+            setP(s,"TRUE");
         }
     }
+    private void setP(int s, String a) {
+        sCTLMap.put(s + a + " ", true);
+    }
+
+//    public void printM() {
+//        for (int i = 0; i < count; i++) {
+//            for (int j = 0; j < count; j++) {
+//                System.out.print(m[i][j] ? 1 : 0);
+//            }
+//            System.out.println();
+//        }
+//    }
 }

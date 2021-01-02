@@ -3,6 +3,10 @@ package com.company;
 import java.util.Stack;
 
 public class CTL {
+
+    public static final CTL CTL_TRUE = new CTL("TRUE");
+    public static final CTL CTL_FAIR = new CTL("FAIR");
+
     private String root;
     private CTL left;
     private CTL right;
@@ -41,18 +45,23 @@ public class CTL {
 
 
     //若不为操作符返回0 否则返回x是几元操作符
-    private int isOperator(String root){
+    public static int isOperator(String root){
         //TODO 可能要增加
         switch (root){
             case "not":
             case "AX":
-            case "EX":{
+            case "EX":
+            case "AF":
+            case "EF":
+            case "AG":
+            case "EG":{
                 return 1;
             }
             case "and":
             case "or":
             case "AU":
-            case "EU": {
+            case "EU":
+            case "->":{
                 return 2;
             }
             default:{
