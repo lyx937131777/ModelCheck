@@ -6,6 +6,9 @@ import java.util.*;
 
 //有向图
 public class Model {
+    private static final String TRUE = "TRUE";
+    private static final String FAIR = "FAIR";
+
     //点数(状态数) 0 到 count-1
     private int count;
 
@@ -32,7 +35,7 @@ public class Model {
             return sCTLMap.get(sCTL);
         }//已经标记过的直接返回标记结果
         String root = ctl.getRoot();
-        if (isOperator(root) == 0) {
+        if (CTL.isOperator(root) == 0) {
             sCTLMap.put(sCTL, false);
         } else {
             sCTLMap.put(sCTL, verify(s, ctl, root));
@@ -52,6 +55,9 @@ public class Model {
             case "or": {
                 return verifyOr(s, ctl);
             }
+            case "->": {
+                return verifyImplication(s, ctl);
+            }
             case "AX": {
                 return verifyAX(s, ctl);
             }
@@ -64,31 +70,23 @@ public class Model {
             case "EU": {
                 return verifyEU(s, ctl);
             }
+            case "AF": {
+                return verifyAF(s, ctl);
+            }
+            case "EF": {
+                return verifyEF(s, ctl);
+            }
+            case "AG": {
+                return verifyAG(s, ctl);
+            }
+            case "EG": {
+                return verifyEG(s, ctl);
+            }
             default:
                 return false;
         }
     }
 
-    //若不为操作符返回0 否则返回x是几元操作符
-    private int isOperator(String root) {
-        //TODO 可能要增加
-        switch (root) {
-            case "not":
-            case "AX":
-            case "EX": {
-                return 1;
-            }
-            case "and":
-            case "or":
-            case "AU":
-            case "EU": {
-                return 2;
-            }
-            default: {
-                return 0;
-            }
-        }
-    }
 
     //6种算子 分别实现
     private boolean verifyNot(int s, CTL ctl) {
@@ -101,6 +99,34 @@ public class Model {
 
     private boolean verifyOr(int s, CTL ctl) {
         return verify(s, ctl.getLeft()) || verify(s, ctl.getRight());
+    }
+
+    private boolean verifyImplication(int s, CTL ctl) {
+        return !verify(s, ctl.getLeft()) || verify(s, ctl.getRight());
+    }
+
+    private boolean verifyAF(int s, CTL ctl) {
+        CTL newCTL = new CTL(CTL.CTL_TRUE, ctl.getLeft(), "AU");
+        return verify(s, newCTL);
+    }
+
+    private boolean verifyEF(int s, CTL ctl) {
+        CTL newCTL = new CTL(CTL.CTL_TRUE, ctl.getLeft(), "EU");
+        return verify(s, newCTL);
+    }
+
+    private boolean verifyAG(int s, CTL ctl) {
+        CTL notCTL = new CTL(ctl.getLeft(), null, "not");
+        CTL efCTL = new CTL(notCTL, null, "EF");
+        CTL newCTL = new CTL(efCTL, null, "not");
+        return verify(s, newCTL);
+    }
+
+    private boolean verifyEG(int s, CTL ctl) {
+        CTL notCTL = new CTL(ctl.getLeft(), null, "not");
+        CTL afCTL = new CTL(notCTL, null, "AF");
+        CTL newCTL = new CTL(afCTL, null, "not");
+        return verify(s, newCTL);
     }
 
     private boolean verifyAX(int s, CTL ctl) {
@@ -215,21 +241,24 @@ public class Model {
             }
             if (flag) {
                 for (int i = 0; i < comp.size(); ++i) {
-                    sCTLMap.put(i + "Q ", true);
-                    temp.add(i);
+                    setP(comp.get(i), FAIR);
+                    temp.add(comp.get(i));
                 }
             }
         }
         for (int n : temp) {
             dfsQ(n);
         }
+        for (int i = 0; i < count; ++i) {
+            System.out.println(getP(i, FAIR));
+        }
     }
 
     //辅助打Q标签的dfs
     private void dfsQ(int u) {
         for (int i = 0; i < count; ++i) {
-            if (m_[u][i] && !sCTLMap.get(i + "Q ")) {
-                sCTLMap.put(i + "Q ", true);
+            if (m_[u][i] && !getP(i, FAIR)) {
+                setP(i, FAIR);
                 dfsQ(i);
             }
         }
@@ -240,25 +269,22 @@ public class Model {
         assert modelText != null;
         String[] modelArray = modelText.split("\n");
         count = Integer.parseInt(modelArray[0]);
+        setTRUE();
         m = new boolean[count][count];
         m_ = new boolean[count][count];
-        for (int i = 0; i < count; ++i) {
-            sCTLMap.put(i + "TRUE ", true);
-        }
         //所有边数
         int edges = Integer.parseInt(modelArray[1]);
         for (int i = 2; i < edges + 2; ++i) {
             String[] node = modelArray[i].split(" ");
             int u = Integer.parseInt(node[0]);
             int v = Integer.parseInt(node[1]);
-            m[u][v] = true;
-            m[v][u] = true;
+            addEdge(u, v);
         }
         //为每个状态上的原子命题打上标签
         for (int i = edges + 2; i < count + edges + 2; ++i) {
             String[] label = modelArray[i].split(" ");
             for (int j = 1; j < label.length; ++j) {
-                sCTLMap.put(label[0] + label[j] + " ", true);
+                setP(Integer.parseInt(label[0]), label[j]);
             }
         }
         //公平性F的个数
@@ -274,30 +300,22 @@ public class Model {
         }
         //获取所有强连通分量
         this.components = new Tarjan(count, m).getComponents();
-
         verifyQ();
     }
 
 
     public void addEdge(int p, int q) {
         m[p][q] = true;
+        m_[q][p] = true;
     }
-
 
     public int getCount() {
         return count;
     }
 
-    public void setP(int s, String a) {
-        sCTLMap.put(s + a, true);
-    }
-
-    public void printM() {
-        for (int i = 0; i < count; i++) {
-            for (int j = 0; j < count; j++) {
-                System.out.print(m[i][j] ? 1 : 0);
-            }
-            System.out.println();
+    private void setTRUE() {
+        for (int s = 0; s < count; s++) {
+            setP(s, "TRUE");
         }
     }
 
@@ -309,4 +327,22 @@ public class Model {
             System.out.println();
         }
     }
+
+    private void setP(int s, String a) {
+        sCTLMap.put(s + a + " ", true);
+    }
+
+    private boolean getP(int s, String a) {
+        return sCTLMap.get(s + a + " ") != null ? sCTLMap.get(s + a + " ") : false;
+    }
+
+
+//    public void printM() {
+//        for (int i = 0; i < count; i++) {
+//            for (int j = 0; j < count; j++) {
+//                System.out.print(m[i][j] ? 1 : 0);
+//            }
+//            System.out.println();
+//        }
+//    }
 }
