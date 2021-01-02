@@ -25,6 +25,8 @@ public class Model {
     //邻接矩阵
     private boolean[][] m;
 
+
+
     //核心函数 对外可见
     //判断某个状态s是否含满足CTL ctl
     public boolean verify(int s, CTL ctl) {
@@ -174,6 +176,10 @@ public class Model {
         return false;
     }
 
+    private void verifyQ() {
+
+    }
+
     //TODO 文件读入 文件中原子先用abcd表示 （这是model单独用一个文件表示时使用的 我倾向于model和CTL放在一个文件输入 写在InputUtil里）
     public Model(String modelText) {
         assert modelText != null;
@@ -199,6 +205,7 @@ public class Model {
                 sCTLMap.put(label[0] + apMap.get(label[j]), true);
             }
         }
+
     }
 
 
