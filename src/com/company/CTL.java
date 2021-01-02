@@ -19,12 +19,12 @@ public class CTL {
             return ;
         }
         Stack<CTL> stack = new Stack<>();
-        for(int i = 0; i < s.length(); i++){
-            char x = s.charAt(i);
-            String root = String.valueOf(x);
-            if(isOperator(x) == 0){
+        String[] nodes = s.split(" ");
+        for(int i = 0; i < nodes.length; i++){
+            String root = nodes[i];
+            if(isOperator(root) == 0){
                 stack.push(new CTL(null,null,root));
-            }else if(isOperator(s.charAt(i)) == 1){
+            }else if(isOperator(root) == 1){
                 CTL l = stack.pop();
                 stack.push(new CTL(l,null,root));
             }else {
@@ -39,21 +39,26 @@ public class CTL {
         right = ctl.getRight();
     }
 
-    //not  0
-    //and 1
-    //AX 2
-    //EX 3
-    //AU 4
-    //EU 5
+
     //若不为操作符返回0 否则返回x是几元操作符
-    private int isOperator(char x){
+    private int isOperator(String root){
         //TODO 可能要增加
-        if(x == '0' || x == '2' || x =='3'){
-            return 1;
-        }else if(x == '1' || x == '4' || x == '5' ){
-            return 2;
+        switch (root){
+            case "not":
+            case "AX":
+            case "EX":{
+                return 1;
+            }
+            case "and":
+            case "or":
+            case "AU":
+            case "EU": {
+                return 2;
+            }
+            default:{
+                return 0;
+            }
         }
-        return 0;
     }
 
     @Override
@@ -65,7 +70,7 @@ public class CTL {
         if(right != null){
             result += right.toString();
         }
-        return result + root;
+        return result + root + " ";
     }
 
 
