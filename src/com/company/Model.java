@@ -41,7 +41,7 @@ public class Model {
                 return verifyNot(s, ctl);
             }
             case "and":
-            case "^":{
+            case "&":{
                 return verifyAnd(s, ctl);
             }
             case "or":

@@ -1,7 +1,6 @@
 package com.company;
 
-import java.io.File;
-import java.lang.reflect.Array;
+
 import java.util.*;
 
 //有向图
@@ -42,7 +41,7 @@ public class ModelF {
                 return verifyNot(s, ctl);
             }
             case "and":
-            case "^":{
+            case "&":{
                 return verifyAnd(s, ctl);
             }
             case "or":

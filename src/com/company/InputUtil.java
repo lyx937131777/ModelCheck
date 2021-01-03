@@ -28,8 +28,7 @@ public class InputUtil {
         }catch (IOException e){
             System.out.println("IO错误");
             return null;
-        }
-        finally {
+        } finally {
             if (reader != null) {
                 try {
                     reader.close();

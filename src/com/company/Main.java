@@ -1,8 +1,5 @@
 package com.company;
 
-import java.lang.reflect.Array;
-import java.util.*;
-
 //系统分析与验证作业 主入口
 public class Main {
 
@@ -19,10 +16,12 @@ public class Main {
 //        checkSystemABP8State.run();
 //        CheckSystem checkSystemABPTest = new CheckSystem("ABPtest");
 //        checkSystemABPTest.run();
+        System.out.print("输入要验证的系统名称：");
         String name = InputUtil.readLine();
         while( !name.equals("quit")){
             CheckSystem checkSystem = new CheckSystem(name);
             checkSystem.run();
+            System.out.print("输入要验证的系统名称：");
             name = InputUtil.readLine();
         }
     }
