@@ -1,0 +1,128 @@
+0 CTL：a 
+state: 0 result:  True, result with fair:  True.  Same
+state: 1 result: False, result with fair: False.  Same
+state: 2 result:  True, result with fair:  True.  Same
+state: 3 result: False, result with fair: False.  Same
+state: 4 result:  True, result with fair:  True.  Same
+state: 5 result: False, result with fair: False.  Same
+state: 6 result: False, result with fair: False.  Same
+1 CTL：b 
+state: 0 result: False, result with fair: False.  Same
+state: 1 result:  True, result with fair:  True.  Same
+state: 2 result: False, result with fair: False.  Same
+state: 3 result:  True, result with fair:  True.  Same
+state: 4 result: False, result with fair: False.  Same
+state: 5 result:  True, result with fair:  True.  Same
+state: 6 result: False, result with fair: False.  Same
+2 CTL：not a 
+state: 0 result: False, result with fair: False.  Same
+state: 1 result:  True, result with fair:  True.  Same
+state: 2 result: False, result with fair: False.  Same
+state: 3 result:  True, result with fair:  True.  Same
+state: 4 result: False, result with fair: False.  Same
+state: 5 result:  True, result with fair:  True.  Same
+state: 6 result:  True, result with fair:  True.  Same
+3 CTL：a and b 
+state: 0 result: False, result with fair: False.  Same
+state: 1 result: False, result with fair: False.  Same
+state: 2 result: False, result with fair: False.  Same
+state: 3 result: False, result with fair: False.  Same
+state: 4 result: False, result with fair: False.  Same
+state: 5 result: False, result with fair: False.  Same
+state: 6 result: False, result with fair: False.  Same
+4 CTL：a or b 
+state: 0 result:  True, result with fair:  True.  Same
+state: 1 result:  True, result with fair:  True.  Same
+state: 2 result:  True, result with fair:  True.  Same
+state: 3 result:  True, result with fair:  True.  Same
+state: 4 result:  True, result with fair:  True.  Same
+state: 5 result:  True, result with fair:  True.  Same
+state: 6 result: False, result with fair: False.  Same
+5 CTL：AX( a ) 
+state: 0 result:  True, result with fair:  True.  Same
+state: 1 result:  True, result with fair:  True.  Same
+state: 2 result: False, result with fair: False.  Same
+state: 3 result: False, result with fair:  True.  Different
+state: 4 result:  True, result with fair:  True.  Same
+state: 5 result: False, result with fair:  True.  Different
+state: 6 result: False, result with fair:  True.  Different
+6 CTL：EX( a ) 
+state: 0 result:  True, result with fair:  True.  Same
+state: 1 result: False, result with fair: False.  Same
+state: 2 result: False, result with fair: False.  Same
+state: 3 result:  True, result with fair:  True.  Same
+state: 4 result:  True, result with fair:  True.  Same
+state: 5 result: False, result with fair: False.  Same
+state: 6 result: False, result with fair: False.  Same
+7 CTL：A[ b U c ]
+state: 0 result: False, result with fair: False.  Same
+state: 1 result:  True, result with fair:  True.  Same
+state: 2 result: False, result with fair: False.  Same
+state: 3 result: False, result with fair: False.  Same
+state: 4 result: False, result with fair: False.  Same
+state: 5 result: False, result with fair:  True.  Different
+state: 6 result: False, result with fair:  True.  Different
+8 CTL：A[ not c U d ]
+state: 0 result: False, result with fair:  True.  Different
+state: 1 result: False, result with fair:  True.  Different
+state: 2 result: False, result with fair:  True.  Different
+state: 3 result: False, result with fair:  True.  Different
+state: 4 result:  True, result with fair:  True.  Same
+state: 5 result: False, result with fair:  True.  Different
+state: 6 result: False, result with fair:  True.  Different
+9 CTL：E[ a U b ]
+state: 0 result:  True, result with fair:  True.  Same
+state: 1 result:  True, result with fair: False.  Different
+state: 2 result:  True, result with fair:  True.  Same
+state: 3 result:  True, result with fair:  True.  Same
+state: 4 result:  True, result with fair:  True.  Same
+state: 5 result:  True, result with fair: False.  Different
+state: 6 result: False, result with fair: False.  Same
+10 CTL：E[ b U c ]
+state: 0 result: False, result with fair: False.  Same
+state: 1 result:  True, result with fair: False.  Different
+state: 2 result: False, result with fair: False.  Same
+state: 3 result:  True, result with fair: False.  Different
+state: 4 result: False, result with fair: False.  Same
+state: 5 result: False, result with fair: False.  Same
+state: 6 result: False, result with fair: False.  Same
+11 CTL：a -> b 
+state: 0 result: False, result with fair: False.  Same
+state: 1 result:  True, result with fair:  True.  Same
+state: 2 result: False, result with fair: False.  Same
+state: 3 result:  True, result with fair:  True.  Same
+state: 4 result: False, result with fair: False.  Same
+state: 5 result:  True, result with fair:  True.  Same
+state: 6 result:  True, result with fair:  True.  Same
+12 CTL：AF( a ) 
+state: 0 result:  True, result with fair:  True.  Same
+state: 1 result:  True, result with fair:  True.  Same
+state: 2 result:  True, result with fair:  True.  Same
+state: 3 result:  True, result with fair:  True.  Same
+state: 4 result:  True, result with fair:  True.  Same
+state: 5 result: False, result with fair:  True.  Different
+state: 6 result: False, result with fair:  True.  Different
+13 CTL：EF( a and b ) 
+state: 0 result: False, result with fair: False.  Same
+state: 1 result: False, result with fair: False.  Same
+state: 2 result: False, result with fair: False.  Same
+state: 3 result: False, result with fair: False.  Same
+state: 4 result: False, result with fair: False.  Same
+state: 5 result: False, result with fair: False.  Same
+state: 6 result: False, result with fair: False.  Same
+14 CTL：AG( a ) 
+state: 0 result: False, result with fair: False.  Same
+state: 1 result: False, result with fair:  True.  Different
+state: 2 result: False, result with fair: False.  Same
+state: 3 result: False, result with fair: False.  Same
+state: 4 result: False, result with fair: False.  Same
+state: 5 result: False, result with fair:  True.  Different
+state: 6 result: False, result with fair:  True.  Different
+15 CTL：EG( b ) 
+state: 0 result: False, result with fair: False.  Same
+state: 1 result: False, result with fair: False.  Same
+state: 2 result: False, result with fair: False.  Same
+state: 3 result: False, result with fair: False.  Same
+state: 4 result: False, result with fair: False.  Same
+state: 5 result: False, result with fair: False.  Same
+state: 6 result: False, result with fair: False.  Same

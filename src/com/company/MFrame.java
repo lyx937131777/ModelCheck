@@ -3,20 +3,16 @@ package com.company;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.GeneralPath;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class MFrame extends JFrame {
 
     private static final long serialVersionUID = 1L;
 
     private static final int WIDTH = 100;
-
     private static final int HEIGHT = 70;
 
     private static final double TAN = (double)HEIGHT / WIDTH;
-
 
     private static final int ARC_WIDTH = 12;
     private static final int ARC_HEIGHT = 12;
@@ -33,7 +29,6 @@ public class MFrame extends JFrame {
 
             Graphics2D gp2d = (Graphics2D) gp;
             //绘制椭圆的边框。
-
             gp2d.setColor(Color.black);
 
             //画状态并标记P
@@ -54,7 +49,7 @@ public class MFrame extends JFrame {
                         if(i != j){
                             drawEdge(gp2d,i,j);
                         }else {
-                            gp2d.drawOval(getCornerX(i),getCornerY(i),10,10);
+                            gp2d.drawOval(getCornerX(i)-15,getCornerY(i)-15,30,30);
                         }
                     }
                 }
@@ -65,9 +60,8 @@ public class MFrame extends JFrame {
             for(int i = 0; i < modelF.getCount(); i++){
                 int x = getCenterX(i);
                 int y = getCenterY(i);
-                gp2d.drawString(String.valueOf(i),x-5,y+5);
+                gp2d.drawString(String.valueOf(i),x-5,y+50);
             }
-
         }
     }
 

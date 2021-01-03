@@ -1,0 +1,155 @@
+0
+c not d AU 
+a 
+a EX 
+TRUE b not AU 
+c not b not c not and EU 
+b not 
+TRUE 
+c FAIR 
+FAIR 
+a b or 
+c not b not c not and FAIR and EU 
+b not AF 
+a AX 
+b not c not and 
+a not EF 
+a AF 
+c not 
+b not c not and FAIR and 
+a b EU 
+TRUE a not EU 
+d not 
+TRUE a AU 
+
+1
+c 
+TRUE 
+a not 
+b c AU 
+b not not 
+a b -> 
+a b or 
+TRUE a AU 
+c not not d not and 
+a not EF not 
+a AF 
+b not AF 
+c not not 
+a AG 
+TRUE b not AU 
+b 
+d not 
+a AX 
+c not d AU 
+
+2
+c not 
+c not b not c not and FAIR and EU 
+b not c not and FAIR and 
+TRUE a AU 
+c not b not c not and EU 
+a b EU 
+c FAIR 
+c not d AU 
+d not 
+TRUE b not AU 
+a not EF 
+b not AF 
+b not 
+TRUE 
+a 
+b not c not and 
+a b or 
+TRUE a not EU 
+FAIR 
+a AF 
+
+3
+FAIR 
+TRUE 
+a not EF 
+a AX 
+a AF 
+TRUE a not FAIR and EU 
+c FAIR 
+a b -> 
+a not 
+a b or 
+TRUE a AU 
+a not FAIR and 
+b not AF 
+c not d AU 
+a EX 
+b 
+a b FAIR and EU 
+a b EU 
+c not b not c not and EU 
+d not 
+TRUE b not AU 
+b FAIR and 
+TRUE a not EU 
+b not not 
+c not 
+
+4
+TRUE a AU 
+b not 
+TRUE b not AU 
+b not c not and FAIR and 
+b not AF 
+c not b not c not and FAIR and EU 
+a b EU 
+a AF 
+c not d AU 
+b not c not and 
+a AX 
+a 
+TRUE 
+c not b not c not and EU 
+d 
+FAIR 
+c FAIR 
+a not EF 
+a b or 
+c not 
+a EX 
+TRUE a not EU 
+
+5
+TRUE 
+d not 
+TRUE a AU 
+b not not 
+TRUE b not AU 
+a AF 
+a AX 
+a AG 
+b 
+b not AF 
+c not 
+a b or 
+a b -> 
+a not 
+a not EF not 
+c not d AU 
+b c AU 
+
+6
+b not AF 
+c not d AU 
+a AF 
+c not 
+a not EF not 
+a b -> 
+d not 
+b not c not and 
+TRUE 
+b c AU 
+TRUE b not AU 
+a AG 
+a AX 
+b not 
+TRUE a AU 
+a not 
+

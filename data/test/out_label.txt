@@ -1,0 +1,120 @@
+0
+TRUE N1 N2 and FAIR and EU 
+N1 N2 or 
+N2 EG 
+N1 N2 -> 
+N1 N2 FAIR and EU 
+N1 N2 EU 
+TRUE 
+FAIR 
+N1 N2 and EF 
+N1 
+N1 not EF 
+N2 
+N1 FAIR 
+N1 not N2 and not N2 N1 and not N1 not N2 and not and EU 
+N2 N1 AU 
+N1 EX 
+TRUE N1 not EU 
+N1 not N2 and FAIR 
+N1 N2 and 
+N2 N1 and 
+TRUE N1 N2 and EU 
+N2 not AF not 
+N1 N2 and FAIR and 
+N1 not N2 and not 
+N2 FAIR and 
+N2 N1 and N1 not N2 and EU 
+N2 not not 
+N1 AF 
+N2 not FAIR 
+TRUE N1 AU 
+
+1
+N2 N1 and not N1 not N2 and not and 
+N2 not AF 
+N1 not N2 and not N2 N1 and not N1 not N2 and not and FAIR and EU 
+N1 not N2 and FAIR 
+N1 not EF 
+FAIR 
+TRUE 
+N2 N1 and not 
+N1 N2 EU 
+N1 not N2 and not 
+N2 not 
+N2 not FAIR 
+N2 N1 AU 
+TRUE N1 AU 
+N1 
+N1 not N2 and not N2 N1 and not N1 not N2 and not and EU 
+N2 N1 and not N1 not N2 and not and FAIR and 
+TRUE N2 not AU 
+N1 N2 or 
+N1 FAIR 
+N1 AF 
+TRUE N1 not EU 
+
+2
+N1 not EF 
+N1 not 
+N2 N1 and not 
+N1 EX 
+TRUE N1 not EU 
+N1 FAIR 
+N1 not N2 and FAIR and 
+N1 N2 or 
+N1 N2 -> 
+TRUE N1 not FAIR and EU 
+N2 N1 and N1 not N2 and AU 
+N2 N1 and N1 not N2 and FAIR and EU 
+N2 EG 
+N2 not FAIR 
+TRUE 
+N1 not N2 and FAIR 
+N2 
+N2 not not 
+N2 FAIR and 
+FAIR 
+N2 N1 and N1 not N2 and EU 
+N1 N2 EU 
+N1 not N2 and 
+N1 not FAIR and 
+N2 not AF not 
+N1 N2 FAIR and EU 
+
+3
+N1 N2 or 
+TRUE 
+N2 not 
+N2 N1 and not 
+N2 N1 and not N1 not N2 and not and 
+TRUE N2 not AU 
+N1 AX 
+N1 AG 
+N1 AF 
+TRUE N1 AU 
+N1 not EF not 
+N1 not N2 and FAIR 
+N2 N1 AU 
+N1 
+N1 not N2 and not 
+N2 not AF 
+
+4
+N2 not not 
+N1 not N2 and 
+N1 not 
+N2 not AF not 
+N2 
+N1 AX 
+N2 EG 
+N2 N1 and not 
+N1 N2 or 
+TRUE 
+N2 not FAIR 
+N1 AG 
+N2 N1 and N1 not N2 and AU 
+N1 not EF not 
+N1 FAIR 
+N1 N2 -> 
+

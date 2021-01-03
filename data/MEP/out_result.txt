@@ -1,0 +1,20 @@
+0 CTL：AF( C1 ) 
+state: 0 result: False, result with fair: False.  Same
+state: 1 result:  True, result with fair:  True.  Same
+state: 2 result: False, result with fair: False.  Same
+state: 3 result:  True, result with fair:  True.  Same
+state: 4 result:  True, result with fair:  True.  Same
+state: 5 result:  True, result with fair:  True.  Same
+state: 6 result: False, result with fair: False.  Same
+state: 7 result:  True, result with fair:  True.  Same
+state: 8 result:  True, result with fair:  True.  Same
+1 CTL：EF( C1 and C2 ) 
+state: 0 result: False, result with fair: False.  Same
+state: 1 result: False, result with fair: False.  Same
+state: 2 result: False, result with fair: False.  Same
+state: 3 result: False, result with fair: False.  Same
+state: 4 result: False, result with fair: False.  Same
+state: 5 result: False, result with fair: False.  Same
+state: 6 result: False, result with fair: False.  Same
+state: 7 result: False, result with fair: False.  Same
+state: 8 result: False, result with fair: False.  Same

@@ -1,0 +1,96 @@
+0 CTL：N1 
+state: 0 result:  True, result with fair:  True.  Same
+state: 1 result:  True, result with fair:  True.  Same
+state: 2 result: False, result with fair: False.  Same
+state: 3 result:  True, result with fair:  True.  Same
+state: 4 result: False, result with fair: False.  Same
+1 CTL：N2 
+state: 0 result:  True, result with fair:  True.  Same
+state: 1 result: False, result with fair: False.  Same
+state: 2 result:  True, result with fair:  True.  Same
+state: 3 result: False, result with fair: False.  Same
+state: 4 result:  True, result with fair:  True.  Same
+2 CTL：not N1 
+state: 0 result: False, result with fair: False.  Same
+state: 1 result: False, result with fair: False.  Same
+state: 2 result:  True, result with fair:  True.  Same
+state: 3 result: False, result with fair: False.  Same
+state: 4 result:  True, result with fair:  True.  Same
+3 CTL：N1 and N2 
+state: 0 result:  True, result with fair:  True.  Same
+state: 1 result: False, result with fair: False.  Same
+state: 2 result: False, result with fair: False.  Same
+state: 3 result: False, result with fair: False.  Same
+state: 4 result: False, result with fair: False.  Same
+4 CTL：N1 or N2 
+state: 0 result:  True, result with fair:  True.  Same
+state: 1 result:  True, result with fair:  True.  Same
+state: 2 result:  True, result with fair:  True.  Same
+state: 3 result:  True, result with fair:  True.  Same
+state: 4 result:  True, result with fair:  True.  Same
+5 CTL：AX( N1 ) 
+state: 0 result: False, result with fair: False.  Same
+state: 1 result: False, result with fair: False.  Same
+state: 2 result: False, result with fair: False.  Same
+state: 3 result: False, result with fair:  True.  Different
+state: 4 result:  True, result with fair:  True.  Same
+6 CTL：EX( N1 ) 
+state: 0 result:  True, result with fair:  True.  Same
+state: 1 result: False, result with fair: False.  Same
+state: 2 result:  True, result with fair:  True.  Same
+state: 3 result: False, result with fair: False.  Same
+state: 4 result:  True, result with fair: False.  Different
+7 CTL：A[ N2 U N1 ]
+state: 0 result:  True, result with fair:  True.  Same
+state: 1 result:  True, result with fair:  True.  Same
+state: 2 result: False, result with fair: False.  Same
+state: 3 result:  True, result with fair:  True.  Same
+state: 4 result:  True, result with fair: False.  Different
+8 CTL：A[ N2 and N1 U not N1 and N2 ]
+state: 0 result: False, result with fair: False.  Same
+state: 1 result: False, result with fair: False.  Same
+state: 2 result:  True, result with fair:  True.  Same
+state: 3 result: False, result with fair: False.  Same
+state: 4 result:  True, result with fair:  True.  Same
+9 CTL：E[ N1 U N2 ]
+state: 0 result:  True, result with fair:  True.  Same
+state: 1 result:  True, result with fair:  True.  Same
+state: 2 result:  True, result with fair:  True.  Same
+state: 3 result:  True, result with fair: False.  Different
+state: 4 result:  True, result with fair: False.  Different
+10 CTL：E[ N2 and N1 U not N1 and N2 ]
+state: 0 result:  True, result with fair:  True.  Same
+state: 1 result: False, result with fair: False.  Same
+state: 2 result:  True, result with fair:  True.  Same
+state: 3 result: False, result with fair: False.  Same
+state: 4 result:  True, result with fair: False.  Different
+11 CTL：N1 -> N2 
+state: 0 result:  True, result with fair:  True.  Same
+state: 1 result: False, result with fair: False.  Same
+state: 2 result:  True, result with fair:  True.  Same
+state: 3 result: False, result with fair: False.  Same
+state: 4 result:  True, result with fair:  True.  Same
+12 CTL：AF( N1 ) 
+state: 0 result:  True, result with fair:  True.  Same
+state: 1 result:  True, result with fair:  True.  Same
+state: 2 result: False, result with fair: False.  Same
+state: 3 result:  True, result with fair:  True.  Same
+state: 4 result:  True, result with fair: False.  Different
+13 CTL：EF( N1 and N2 ) 
+state: 0 result:  True, result with fair:  True.  Same
+state: 1 result: False, result with fair: False.  Same
+state: 2 result: False, result with fair: False.  Same
+state: 3 result: False, result with fair: False.  Same
+state: 4 result: False, result with fair: False.  Same
+14 CTL：AG( N1 ) 
+state: 0 result: False, result with fair: False.  Same
+state: 1 result: False, result with fair: False.  Same
+state: 2 result: False, result with fair: False.  Same
+state: 3 result: False, result with fair:  True.  Different
+state: 4 result: False, result with fair:  True.  Different
+15 CTL：EG( N2 ) 
+state: 0 result:  True, result with fair:  True.  Same
+state: 1 result: False, result with fair: False.  Same
+state: 2 result:  True, result with fair:  True.  Same
+state: 3 result: False, result with fair: False.  Same
+state: 4 result: False, result with fair:  True.  Different
