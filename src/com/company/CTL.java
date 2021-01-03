@@ -46,7 +46,6 @@ public class CTL {
 
     //若不为操作符返回0 否则返回x是几元操作符
     private int isOperator(String root){
-        //TODO 可能要增加
         switch (root){
             case "not":
             case "!":

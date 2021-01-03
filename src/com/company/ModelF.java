@@ -267,7 +267,7 @@ public class ModelF {
     private void dfsQ(int u,boolean[][] m0, String Q) {
         for (int i = 0; i < count; ++i) {
             if (m0[i][u] && !getP(i, Q)) {
-                setP(i, Q);//TODO
+                setP(i, Q);
                 dfsQ(i,m0,Q);
             }
         }

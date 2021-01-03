@@ -3,7 +3,9 @@ package com.company;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.GeneralPath;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class MFrame extends JFrame {
 
@@ -62,6 +64,27 @@ public class MFrame extends JFrame {
                 int y = getCenterY(i);
                 gp2d.drawString(String.valueOf(i),x-5,y+50);
             }
+
+            //TODO 打Label 太负责则注释掉
+//            Map<String,Boolean> sCTLMap = modelF.getsCTLMap();
+//            List<String>[] labelLists = new List[modelF.getCount()];
+//            for(int i = 0; i < modelF.getCount(); i++){
+//                labelLists[i] = new ArrayList<>();
+//            }
+//            for(Map.Entry<String,Boolean> entry : sCTLMap.entrySet()){
+//                if(entry.getValue()){
+//                    String key = entry.getKey();
+//                    int s = key.charAt(0) - '0';
+//                    labelLists[s].add(key.substring(1));
+//                }
+//            }
+//            for(int i = 0; i < modelF.getCount(); i++){
+//                int x = getCornerX(i) - 110 - i%2*(-1) * 220;
+//                int y = getCornerY(i);
+//                for(int j =0; j < labelLists[i].size(); j++){
+//                    gp2d.drawString(labelLists[i].get(j),x,y+j*20);
+//                }
+//            }
         }
     }
 
