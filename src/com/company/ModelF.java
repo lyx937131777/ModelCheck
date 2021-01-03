@@ -5,7 +5,7 @@ import java.lang.reflect.Array;
 import java.util.*;
 
 //有向图
-public class Model {
+public class ModelF {
     private static final String TRUE = "TRUE";
     private static final String FAIR = "FAIR";
 
@@ -20,6 +20,7 @@ public class Model {
 
     //公平性状态集合
     private List<List<Integer>> fair = new ArrayList<>();
+
 
     //核心函数 对外可见
     //判断某个状态s是否含满足CTL ctl.txt
@@ -83,6 +84,7 @@ public class Model {
 
 
     //12种算子 分别实现
+    //单点验证和不带公平性相同
     private boolean verifyRoot(int s, CTL ctl){
         return hasTrueLabel(s,ctl);
     }
@@ -103,33 +105,10 @@ public class Model {
         return !verify(s, ctl.getLeft()) || verify(s, ctl.getRight());
     }
 
-    private boolean verifyAF(int s, CTL ctl) {
-        CTL newCTL = new CTL(CTL.CTL_TRUE, ctl.getRight(), "AU");
-        return verify(s, newCTL);
-    }
-
-    private boolean verifyEF(int s, CTL ctl) {
-        CTL newCTL = new CTL(CTL.CTL_TRUE, ctl.getRight(), "EU");
-        return verify(s, newCTL);
-    }
-
-    private boolean verifyAG(int s, CTL ctl) {
-        CTL notCTL = new CTL(null, ctl.getRight(), "not");
-        CTL efCTL = new CTL(null, notCTL, "EF");
-        CTL newCTL = new CTL(null, efCTL, "not");
-        return verify(s, newCTL);
-    }
-
-    private boolean verifyEG(int s, CTL ctl) {
-        CTL notCTL = new CTL(null, ctl.getRight(), "not");
-        CTL afCTL = new CTL(null, notCTL, "AF");
-        CTL newCTL = new CTL(null, afCTL, "not");
-        return verify(s, newCTL);
-    }
-
+    //next只考虑公平路径 因此只看公平路径的后继点
     private boolean verifyAX(int s, CTL ctl) {
         for (int t = 0; t < count; t++) {
-            if (m[s][t] && !verify(t, ctl.getRight())) {
+            if (m[s][t] && getP(t,FAIR) && !verify(t, ctl.getRight())) {
                 return false;
             }
         }
@@ -138,49 +117,21 @@ public class Model {
 
     private boolean verifyEX(int s, CTL ctl) {
         for (int t = 0; t < count; t++) {
-            if (m[s][t] && verify(t, ctl.getRight())) {
+            if (m[s][t] && getP(t,FAIR) && verify(t, ctl.getRight())) {
                 return true;
             }
         }
         return false;
     }
 
-    private boolean verifyAU(int s, CTL ctl) {
-        boolean[] visited = new boolean[count];
-        Queue<Integer> queue = new LinkedList<>();
-        queue.offer(s);
-        while (!queue.isEmpty()) {
-            int u = queue.poll();
-            String uCTL = u + ctl.toString();
-            if (sCTLMap.get(uCTL) != null) {
-                if (sCTLMap.get(uCTL)) {
-                    continue;
-                }
-                return false;
-            }
-            if (visited[u]) {
-                setLabel(u,ctl,false);
-                return false;
-            }
-            visited[u] = true;
-            if (verify(u, ctl.getRight())) {
-                setLabel(u,ctl,true);
-                continue;
-            }
-            if (!verify(u, ctl.getLeft())) {
-                setLabel(u,ctl,false);
-                return false;
-            }
-            for (int v = 0; v < count; v++) {
-                if (m[u][v]) {
-                    queue.offer(v);
-                }
-            }
-        }
-        return true;
+    //EU 将右节点改一下即可
+    private boolean verifyEU(int s, CTL ctl) {
+        CTL rightCTL = new CTL(ctl.getRight(), CTL.CTL_FAIR, "and");
+        CTL newCTL = new CTL(ctl.getLeft(),rightCTL,"EU");
+        return verifyEU2(s,newCTL);
     }
 
-    private boolean verifyEU(int s, CTL ctl) {
+    private boolean verifyEU2(int s, CTL ctl) {
         boolean[] visited = new boolean[count];
         Queue<Integer> queue = new LinkedList<>();
         queue.offer(s);
@@ -214,6 +165,63 @@ public class Model {
         return false;
     }
 
+    //AU 计算 非（x1 || x2） 的值即可
+    private boolean verifyAU(int s, CTL ctl){
+        CTL notLeft = new CTL(null,ctl.getLeft(),"not");
+        CTL notRight = new CTL(null, ctl.getRight(),"not");
+        CTL andCTL = new CTL(notLeft,notRight,"and");
+        CTL euCTL = new CTL(notRight,andCTL,"EU");
+        return !(verify(s,euCTL) || verifyEGNotF2(s,ctl.getRight()));
+    }
+
+    //计算x2
+    private boolean verifyEGNotF2(int s, CTL f2) {
+        boolean[][] mGR = copyM();
+        List<Integer> elimitatedState = new ArrayList<>();
+        for(int i = 0; i < count; i++){
+             if(verify(i,f2)){
+                 elimitatedState.add(i);
+                 for(int j = 0; j < count; j++){
+                     mGR[i][j] = false;
+                     mGR[j][i] = true;
+                 }
+             }
+        }
+        if(elimitatedState.contains(s)){
+            return false;
+        }
+        List<List<Integer>> components = new Tarjan(count, mGR).getComponents();
+        String Q = f2.toString() + FAIR;
+        verifyQ(components,mGR,Q);
+        return getP(s,Q);
+    }
+
+    //这些随着AU和EU变化自动变化
+    private boolean verifyAF(int s, CTL ctl) {
+        CTL newCTL = new CTL(CTL.CTL_TRUE, ctl.getRight(), "AU");
+        return verify(s, newCTL);
+    }
+
+    private boolean verifyEF(int s, CTL ctl) {
+        CTL newCTL = new CTL(CTL.CTL_TRUE, ctl.getRight(), "EU");
+        return verify(s, newCTL);
+    }
+
+    private boolean verifyAG(int s, CTL ctl) {
+        CTL notCTL = new CTL(null, ctl.getRight(), "not");
+        CTL efCTL = new CTL(null, notCTL, "EF");
+        CTL newCTL = new CTL(null, efCTL, "not");
+        return verify(s, newCTL);
+    }
+
+    private boolean verifyEG(int s, CTL ctl) {
+        CTL notCTL = new CTL(null, ctl.getRight(), "not");
+        CTL afCTL = new CTL(null, notCTL, "AF");
+        CTL newCTL = new CTL(null, afCTL, "not");
+        return verify(s, newCTL);
+    }
+
+    //打Q （包括f2Q）
     private void verifyQ(List<List<Integer>> components, boolean[][] m0, String Q) {
         List<Integer> temp = new ArrayList<>();
         // 遍历所有强连通分量
@@ -247,8 +255,9 @@ public class Model {
         for (int n : temp) {
             dfsQ(n, m0, Q);
         }
+//        printArray(components);
 //        for (int i = 0; i < count; ++i) {
-//            System.out.println(getP(i, FAIR));
+//            System.out.println(getP(i, Q));
 //        }
     }
 
@@ -256,13 +265,13 @@ public class Model {
     private void dfsQ(int u,boolean[][] m0, String Q) {
         for (int i = 0; i < count; ++i) {
             if (m0[i][u] && !getP(i, Q)) {
-                setP(i, Q);
+                setP(i, Q);//TODO
                 dfsQ(i,m0,Q);
             }
         }
     }
 
-    public Model(String modelText) {
+    public ModelF(String modelText) {
         assert modelText != null;
         String[] modelArray = modelText.split("\n");
         count = Integer.parseInt(modelArray[0]);
@@ -294,6 +303,7 @@ public class Model {
             }
             fair.add(list);
         }
+
         //获取所有强连通分量
         List<List<Integer>> components = new Tarjan(count, m).getComponents();
         verifyQ(components,m,FAIR);
@@ -339,6 +349,13 @@ public class Model {
         return sCTLMap.get(s + ctl.toString()) != null ? sCTLMap.get(s + ctl.toString()):false;
     }
 
+    private boolean[][] copyM(){
+        boolean[][] copy = new boolean[count][count];
+        for(int i = 0; i < count; i++){
+            copy[i] = m[i].clone();
+        }
+        return copy;
+    }
 
 //    public void printM() {
 //        for (int i = 0; i < count; i++) {

@@ -29,8 +29,8 @@ public class CTL {
             if(isOperator(root) == 0){
                 stack.push(new CTL(null,null,root));
             }else if(isOperator(root) == 1){
-                CTL l = stack.pop();
-                stack.push(new CTL(l,null,root));
+                CTL r = stack.pop();
+                stack.push(new CTL(null,r,root));
             }else {
                 CTL r = stack.pop();
                 CTL l = stack.pop();
@@ -49,16 +49,19 @@ public class CTL {
         //TODO 可能要增加
         switch (root){
             case "not":
+            case "!":
             case "AX":
             case "EX":
             case "AF":
             case "EF":
             case "AG":
-            case "EG":{
+            case "EG": {
                 return 1;
             }
             case "and":
+            case "^":
             case "or":
+            case "|":
             case "AU":
             case "EU":
             case "->":{
@@ -82,7 +85,40 @@ public class CTL {
         return result + root + " ";
     }
 
+    public String inOrder(){
+        String result = "";
+        switch (root){
+            case "AU":
+            case "EU":{
+                result = root.charAt(0) +"[ " + left.inOrder() + "U " + right.inOrder() +"]";
+                break;
+            }
+            case "AX":
+            case "EX":
+            case "AF":
+            case "EF":
+            case "AG":
+            case "EG":{
+                result = root + "( " + right.inOrder() + ") ";
+                break;
+            }
+            default:{
+                if(left != null){
+                    result += left.inOrder();
+                }
+                result += root + " ";
+                if(right != null){
+                    result += right.inOrder();
+                }
+                break;
+            }
+        }
+        return result;
+    }
 
+    public void print(){
+        System.out.println("CTL: " + inOrder());
+    }
 
     public String getRoot() {
         return root;

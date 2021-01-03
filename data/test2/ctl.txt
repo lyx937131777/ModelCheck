@@ -1,0 +1,17 @@
+16
+a
+b
+a not
+a b and
+a b or
+a AX
+a EX
+b c AU
+c not d AU
+a b EU
+b c EU
+a b ->
+a AF
+a b and EF
+a AG
+b EG

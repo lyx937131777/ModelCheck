@@ -1,14 +1,16 @@
 package com.company;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.util.Scanner;
 
 //输入
 public class InputUtil {
-    //TODO 文件读入 文件中原子先用abcd表示 CTL中算子也用0123表示
-    //TODO 我倾向于model和CTL在同一个文件中输入 前面是model 后面再一个数字m表示CTL的个数 后面m行CTL
+
+    public static String readLine(){
+        Scanner input = new Scanner(System.in);
+        return input.nextLine();
+    }
+
     public static String readFile(String fileName) {
         File f = new File(fileName);
         BufferedReader reader = null;
@@ -20,9 +22,14 @@ public class InputUtil {
                 sb.append(s).append("\n");
             }
             return sb.toString();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
+        } catch (FileNotFoundException e) {
+            System.out.println("文件名不存在");
+            return null;
+        }catch (IOException e){
+            System.out.println("IO错误");
+            return null;
+        }
+        finally {
             if (reader != null) {
                 try {
                     reader.close();
@@ -31,6 +38,7 @@ public class InputUtil {
                 }
             }
         }
-        return null;
     }
+
+
 }

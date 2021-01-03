@@ -52,7 +52,7 @@ public class Tarjan {
 
     private void tarjan(int u) {
         //每次dfs，u的次序号增加1
-        dfn[u] = low[u] = idx++;
+        dfn[u] = low[u] = ++idx;
         //u入栈并且标记
         s.push(u);
         ins[u] = true;
