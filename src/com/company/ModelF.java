@@ -8,16 +8,19 @@ public class ModelF {
     private static final String TRUE = "TRUE";
     private static final String FAIR = "FAIR";
 
-    //点数(状态数) 0 到 count-1
+    //S 点数(状态数) 0 到 count-1
     private int count;
 
-    //状态+后序表达式的形式
+    //Label 状态+后序表达式的形式
     private Map<String, Boolean> sCTLMap = new HashMap<>();
 
-    //邻接矩阵
+    //R 邻接矩阵
     private boolean[][] m;
 
-    //公平性状态集合
+    //P
+    private List<String>[] pList;
+
+    //F 公平性状态集合
     private List<List<Integer>> fair = new ArrayList<>();
 
 
@@ -285,9 +288,12 @@ public class ModelF {
             addEdge(u, v);
         }
         //为每个状态上的原子命题打上标签
+        pList = new List[count];
         for (int i = edges + 2; i < count + edges + 2; ++i) {
             String[] label = modelArray[i].split(" ");
+            pList[i-edges-2] = new ArrayList<>();
             for (int j = 1; j < label.length; ++j) {
+                pList[i-edges-2].add(label[j]);
                 setP(Integer.parseInt(label[0]), label[j]);
             }
         }
@@ -311,6 +317,10 @@ public class ModelF {
 
     public void addEdge(int p, int q) {
         m[p][q] = true;
+    }
+
+    public boolean hasEdge(int p, int q){
+        return m[p][q];
     }
 
     public int getCount() {
@@ -356,7 +366,14 @@ public class ModelF {
         return copy;
     }
 
-//    public void printM() {
+    public List<String>[] getPList() {
+        return pList;
+    }
+
+    public Map<String, Boolean> getsCTLMap() {
+        return sCTLMap;
+    }
+    //    public void printM() {
 //        for (int i = 0; i < count; i++) {
 //            for (int j = 0; j < count; j++) {
 //                System.out.print(m[i][j] ? 1 : 0);

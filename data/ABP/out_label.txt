@@ -1,0 +1,139 @@
+0
+RcvMsg not RcvMsg not SndMsg AU and 
+SndMsg Smsg not and SndMsg SndMsg not SndMsg not RcvMsg Rmsg not and EU and EU -> not EF not 
+SndMsg Smsg and SndMsg SndMsg not SndMsg not RcvMsg Rmsg and EU and EU -> not EF not 
+RcvMsg not 
+SndMsg Smsg and SndMsg SndMsg not SndMsg not RcvMsg Rmsg and AU and AU -> AG 
+RcvMsg Rmsg not and not SndMsg not not RcvMsg Rmsg not and not and FAIR and EU 
+RcvMsg Rmsg and not SndMsg not not RcvMsg Rmsg and not and FAIR and EU 
+SndMsg not not RcvMsg Rmsg not and not and 
+TRUE 
+SndMsg not not RcvMsg Rmsg not and not and FAIR and 
+SndMsg Smsg not and SndMsg SndMsg not SndMsg not RcvMsg Rmsg not and EU and EU -> AG 
+FAIR 
+RcvMsg RcvMsg RcvMsg not RcvMsg not SndMsg AU and AU -> not EF not 
+SndMsg not SndMsg not RcvMsg Rmsg and AU and not 
+SndMsg SndMsg not SndMsg not RcvMsg Rmsg and EU and EU 
+RcvMsg Rmsg not and not 
+SndMsg Smsg and SndMsg SndMsg not SndMsg not RcvMsg Rmsg and EU and EU -> 
+SndMsg Smsg not and SndMsg SndMsg not SndMsg not RcvMsg Rmsg not and AU and AU -> not EF not 
+SndMsg Smsg not and SndMsg SndMsg not SndMsg not RcvMsg Rmsg not and AU and AU -> 
+SndMsg 
+RcvMsg RcvMsg RcvMsg not RcvMsg not SndMsg AU and AU -> AG 
+SndMsg SndMsg not SndMsg not RcvMsg Rmsg and AU and AU 
+SndMsg Smsg and SndMsg SndMsg not SndMsg not RcvMsg Rmsg and AU and AU -> not EF not 
+SndMsg not not RcvMsg Rmsg and not and 
+SndMsg Smsg and SndMsg SndMsg not SndMsg not RcvMsg Rmsg and EU and EU -> AG 
+SndMsg not SndMsg not RcvMsg Rmsg not and AU and FAIR 
+SndMsg not not RcvMsg Rmsg and not and FAIR and 
+RcvMsg not SndMsg AU 
+SndMsg Smsg not and SndMsg SndMsg not SndMsg not RcvMsg Rmsg not and AU and AU -> AG 
+SndMsg Smsg and SndMsg SndMsg not SndMsg not RcvMsg Rmsg and AU and AU -> 
+Smsg 
+SndMsg Smsg not and SndMsg SndMsg not SndMsg not RcvMsg Rmsg not and EU and EU -> 
+RcvMsg Rmsg and not 
+SndMsg Smsg and 
+SndMsg not not 
+RcvMsg RcvMsg RcvMsg not RcvMsg not SndMsg AU and AU -> 
+
+1
+SndMsg Smsg and SndMsg SndMsg not SndMsg not RcvMsg Rmsg and AU and AU -> not EF not 
+RcvMsg RcvMsg RcvMsg not RcvMsg not SndMsg AU and AU -> not EF not 
+SndMsg Smsg and SndMsg SndMsg not SndMsg not RcvMsg Rmsg and EU and EU -> 
+SndMsg Smsg not and SndMsg SndMsg not SndMsg not RcvMsg Rmsg not and EU and EU -> not EF not 
+SndMsg 
+SndMsg Smsg and SndMsg SndMsg not SndMsg not RcvMsg Rmsg and AU and AU -> 
+SndMsg not SndMsg not RcvMsg Rmsg and AU and FAIR 
+FAIR 
+SndMsg not SndMsg not RcvMsg Rmsg not and AU and not 
+TRUE 
+RcvMsg not SndMsg AU 
+SndMsg Smsg not and SndMsg SndMsg not SndMsg not RcvMsg Rmsg not and EU and EU -> AG 
+SndMsg SndMsg not SndMsg not RcvMsg Rmsg not and AU and AU 
+SndMsg Smsg and SndMsg SndMsg not SndMsg not RcvMsg Rmsg and EU and EU -> AG 
+SndMsg Smsg and SndMsg SndMsg not SndMsg not RcvMsg Rmsg and AU and AU -> AG 
+SndMsg Smsg not and SndMsg SndMsg not SndMsg not RcvMsg Rmsg not and AU and AU -> not EF not 
+SndMsg Smsg not and 
+SndMsg Smsg and SndMsg SndMsg not SndMsg not RcvMsg Rmsg and EU and EU -> not EF not 
+SndMsg Smsg not and SndMsg SndMsg not SndMsg not RcvMsg Rmsg not and EU and EU -> 
+RcvMsg RcvMsg RcvMsg not RcvMsg not SndMsg AU and AU -> 
+SndMsg SndMsg not SndMsg not RcvMsg Rmsg not and EU and EU 
+Smsg not 
+SndMsg Smsg not and SndMsg SndMsg not SndMsg not RcvMsg Rmsg not and AU and AU -> 
+RcvMsg not 
+RcvMsg RcvMsg RcvMsg not RcvMsg not SndMsg AU and AU -> AG 
+SndMsg Smsg not and SndMsg SndMsg not SndMsg not RcvMsg Rmsg not and AU and AU -> AG 
+RcvMsg not RcvMsg not SndMsg AU and 
+
+2
+RcvMsg RcvMsg RcvMsg not RcvMsg not SndMsg AU and AU -> AG 
+SndMsg Smsg and SndMsg SndMsg not SndMsg not RcvMsg Rmsg and EU and EU -> not EF not 
+SndMsg Smsg and SndMsg SndMsg not SndMsg not RcvMsg Rmsg and EU and EU -> AG 
+SndMsg Smsg not and SndMsg SndMsg not SndMsg not RcvMsg Rmsg not and EU and EU -> not EF not 
+RcvMsg RcvMsg RcvMsg not RcvMsg not SndMsg AU and AU -> not EF not 
+RcvMsg not RcvMsg not SndMsg AU and not 
+RcvMsg Rmsg not and not 
+SndMsg not SndMsg not RcvMsg Rmsg and EU and FAIR and 
+SndMsg Smsg not and SndMsg SndMsg not SndMsg not RcvMsg Rmsg not and EU and EU -> AG 
+SndMsg Smsg and SndMsg SndMsg not SndMsg not RcvMsg Rmsg and AU and AU -> AG 
+SndMsg Smsg and SndMsg SndMsg not SndMsg not RcvMsg Rmsg and AU and AU -> 
+SndMsg not SndMsg not RcvMsg Rmsg not and AU and FAIR 
+SndMsg Smsg not and SndMsg SndMsg not SndMsg not RcvMsg Rmsg not and AU and AU -> 
+RcvMsg RcvMsg RcvMsg not RcvMsg not SndMsg AU and AU -> 
+SndMsg not 
+SndMsg not RcvMsg Rmsg and AU 
+SndMsg Smsg and SndMsg SndMsg not SndMsg not RcvMsg Rmsg and AU and AU -> not EF not 
+SndMsg not SndMsg not RcvMsg Rmsg and AU and 
+SndMsg Smsg and SndMsg SndMsg not SndMsg not RcvMsg Rmsg and EU and EU -> 
+SndMsg not RcvMsg Rmsg and FAIR and EU 
+Rmsg 
+RcvMsg Rmsg not and not SndMsg not not RcvMsg Rmsg not and not and EU 
+SndMsg Smsg not and SndMsg SndMsg not SndMsg not RcvMsg Rmsg not and EU and EU -> 
+SndMsg Smsg not and SndMsg SndMsg not SndMsg not RcvMsg Rmsg not and AU and AU -> not EF not 
+SndMsg not SndMsg not RcvMsg Rmsg and EU and 
+TRUE 
+SndMsg Smsg not and SndMsg SndMsg not SndMsg not RcvMsg Rmsg not and AU and AU -> AG 
+RcvMsg 
+RcvMsg Rmsg and 
+SndMsg SndMsg not SndMsg not RcvMsg Rmsg and EU and FAIR and EU 
+RcvMsg RcvMsg not RcvMsg not SndMsg AU and AU 
+FAIR 
+SndMsg not RcvMsg Rmsg and EU 
+RcvMsg Rmsg and FAIR and 
+
+3
+SndMsg not RcvMsg Rmsg not and AU 
+SndMsg Smsg and SndMsg SndMsg not SndMsg not RcvMsg Rmsg and AU and AU -> not EF not 
+RcvMsg RcvMsg RcvMsg not RcvMsg not SndMsg AU and AU -> not EF not 
+SndMsg Smsg and SndMsg SndMsg not SndMsg not RcvMsg Rmsg and EU and EU -> 
+FAIR 
+RcvMsg RcvMsg RcvMsg not RcvMsg not SndMsg AU and AU -> 
+TRUE 
+SndMsg Smsg not and SndMsg SndMsg not SndMsg not RcvMsg Rmsg not and AU and AU -> AG 
+RcvMsg 
+SndMsg Smsg and SndMsg SndMsg not SndMsg not RcvMsg Rmsg and AU and AU -> AG 
+SndMsg not SndMsg not RcvMsg Rmsg not and AU and 
+RcvMsg RcvMsg not RcvMsg not SndMsg AU and AU 
+SndMsg Smsg not and SndMsg SndMsg not SndMsg not RcvMsg Rmsg not and EU and EU -> AG 
+SndMsg Smsg not and SndMsg SndMsg not SndMsg not RcvMsg Rmsg not and AU and AU -> 
+SndMsg Smsg and SndMsg SndMsg not SndMsg not RcvMsg Rmsg and AU and AU -> 
+SndMsg SndMsg not SndMsg not RcvMsg Rmsg not and EU and FAIR and EU 
+SndMsg not RcvMsg Rmsg not and FAIR and EU 
+SndMsg not SndMsg not RcvMsg Rmsg not and EU and 
+RcvMsg Rmsg not and FAIR and 
+RcvMsg not RcvMsg not SndMsg AU and not 
+SndMsg not SndMsg not RcvMsg Rmsg and AU and FAIR 
+Rmsg not 
+SndMsg not RcvMsg Rmsg not and EU 
+RcvMsg Rmsg not and 
+SndMsg Smsg and SndMsg SndMsg not SndMsg not RcvMsg Rmsg and EU and EU -> not EF not 
+RcvMsg RcvMsg RcvMsg not RcvMsg not SndMsg AU and AU -> AG 
+SndMsg Smsg not and SndMsg SndMsg not SndMsg not RcvMsg Rmsg not and EU and EU -> not EF not 
+RcvMsg Rmsg and not 
+SndMsg Smsg and SndMsg SndMsg not SndMsg not RcvMsg Rmsg and EU and EU -> AG 
+SndMsg Smsg not and SndMsg SndMsg not SndMsg not RcvMsg Rmsg not and AU and AU -> not EF not 
+SndMsg not SndMsg not RcvMsg Rmsg not and EU and FAIR and 
+SndMsg Smsg not and SndMsg SndMsg not SndMsg not RcvMsg Rmsg not and EU and EU -> 
+RcvMsg Rmsg and not SndMsg not not RcvMsg Rmsg and not and EU 
+SndMsg not 
+

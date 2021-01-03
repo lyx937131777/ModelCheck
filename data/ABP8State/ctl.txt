@@ -1,6 +1,0 @@
-5
-RcvMsg RcvMsg RcvMsg not RcvMsg not SndMsg AU and AU -> AG
-SndMsg Smsg and SndMsg SndMsg not SndMsg not RcvMsg Rmsg and AU and AU -> AG
-SndMsg Smsg not and SndMsg SndMsg not SndMsg not RcvMsg Rmsg not and AU and AU -> AG
-SndMsg Smsg and SndMsg SndMsg not SndMsg not RcvMsg Rmsg and EU and EU -> AG
-SndMsg Smsg not and SndMsg SndMsg not SndMsg not RcvMsg Rmsg not and EU and EU -> AG
