@@ -2,6 +2,8 @@ package com.company;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.GeneralPath;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,10 +22,36 @@ public class MFrame extends JFrame {
     private static final int ARC_HEIGHT = 12;
 
     private ModelF modelF;
+    private CheckSystem checkSystem;
 
-    class MPane extends JPanel{
+    class MPane extends JPanel {
 
         private static final long serialVersionUID = 1L;
+
+        private JButton verifyButton = new JButton("开始验证");
+        private JButton repaintButton = new JButton("重绘标签");
+
+        public MPane(){
+            this.setLayout(null);
+            verifyButton.setBounds(1000,20,80,30);
+            repaintButton.setBounds(1000,60,80,30);
+
+            verifyButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    checkSystem.run();
+                }
+            });
+            repaintButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    repaint();
+                }
+            });
+
+            this.add(verifyButton);
+            this.add(repaintButton);
+        }
 
         @Override
         public void paint(Graphics gp){
@@ -65,36 +93,40 @@ public class MFrame extends JFrame {
                 gp2d.drawString(String.valueOf(i),x-5,y+50);
             }
 
-            //TODO 打Label 太负责则注释掉
-//            Map<String,Boolean> sCTLMap = modelF.getsCTLMap();
-//            List<String>[] labelLists = new List[modelF.getCount()];
-//            for(int i = 0; i < modelF.getCount(); i++){
-//                labelLists[i] = new ArrayList<>();
-//            }
-//            for(Map.Entry<String,Boolean> entry : sCTLMap.entrySet()){
-//                if(entry.getValue()){
-//                    String key = entry.getKey();
-//                    int s = key.charAt(0) - '0';
-//                    labelLists[s].add(key.substring(1));
-//                }
-//            }
-//            for(int i = 0; i < modelF.getCount(); i++){
-//                int x = getCornerX(i) - 110 - i%2*(-1) * 220;
-//                int y = getCornerY(i);
-//                for(int j =0; j < labelLists[i].size(); j++){
-//                    gp2d.drawString(labelLists[i].get(j),x,y+j*20);
-//                }
-//            }
+            //TODO 打Label 太复杂则注释掉
+            Map<String,Boolean> sCTLMap = modelF.getsCTLMap();
+            List<String>[] labelLists = new List[modelF.getCount()];
+            for(int i = 0; i < modelF.getCount(); i++){
+                labelLists[i] = new ArrayList<>();
+            }
+            for(Map.Entry<String,Boolean> entry : sCTLMap.entrySet()){
+                if(entry.getValue()){
+                    String key = entry.getKey();
+                    int s = key.charAt(0) - '0';
+                    labelLists[s].add(key.substring(1));
+                }
+            }
+            for(int i = 0; i < modelF.getCount(); i++){
+                int x = getCornerX(i) - 110 - i%2*(-1) * 220;
+                int y = getCornerY(i);
+                for(int j =0; j < labelLists[i].size(); j++){
+                    gp2d.drawString(labelLists[i].get(j),x,y+j*20);
+                }
+            }
+
+//            checkSystem.run();
         }
     }
 
-    public MFrame(String name, ModelF modelF){
+    public MFrame(String name, ModelF modelF, CheckSystem checkSystem){
         this.modelF = modelF;
+        this.checkSystem = checkSystem;
         this.setSize(1200, 800);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);//设置窗体关闭模式
 
         setContentPane(new MPane());
 
+//        getContentPane().add(new MPane());
         this.setTitle(name + "模型状态图");
 
         this.setLocationRelativeTo(null);//窗体居中
@@ -104,7 +136,7 @@ public class MFrame extends JFrame {
     }
 
     private int getCornerX(int i){
-        return  200 + i%2 * 600 - i/2%2 * 100;
+        return  300 + i%2 * 500 - i/2%2 * 100;
     }
 
     private int getCornerY(int i){

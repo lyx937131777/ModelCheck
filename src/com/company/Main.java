@@ -20,7 +20,7 @@ public class Main {
         String name = InputUtil.readLine();
         while( !name.equals("quit")){
             CheckSystem checkSystem = new CheckSystem(name);
-            checkSystem.run();
+//            checkSystem.run();
             System.out.print("输入要验证的系统名称：");
             name = InputUtil.readLine();
         }

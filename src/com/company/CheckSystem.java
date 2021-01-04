@@ -24,6 +24,10 @@ public class CheckSystem {
         if(cltText != null){
             ctlQuery = new CTLQuery(cltText);
         }
+        if(model == null || modelF == null || ctlQuery == null){
+            return;
+        }
+        paint();
     }
 
     public void run(){
@@ -41,8 +45,8 @@ public class CheckSystem {
         }
         System.out.println("CheckSystem: \"" + name + "\" end!");
         System.out.println("========================================");
+        System.out.print("输入要验证的系统名称：");
         output();
-        paint();
     }
 
     public void output(){
@@ -87,7 +91,7 @@ public class CheckSystem {
     }
 
     public void paint(){
-        new MFrame(name,modelF);
+        new MFrame(name,modelF,this);
     }
 
     private void printResult(int s, boolean result, boolean resultWithFair){
